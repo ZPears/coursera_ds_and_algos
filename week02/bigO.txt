@@ -1,0 +1,56 @@
+// Notes on the Big-O Notation set of lectures
+
+## Lecture 1
+
+Need a new way to approximate runtime without knowing all the underlying details.
+
+
+
+## Lecture 2 - Asymptotic Notation
+
+Computing runtime is hard - dependent on fine details of program and details or computer (speed, system architecture, etc)
+
+HOWEVER, most details only change the runtime by constants (for ex., a computer that's 100x as fast, an architecture that takes 3x less time to perform multiplications, etc)
+
+So we'll IGNORE these constants, and look at them as asymptotic runtimes.
+Does it scale with n? n^2? log n? etc., etc.
+
+This is what really matters. For example, runtimes for different n = 10^9:
+
+n = 1 sec. n/second = 10^9
+n log n = 30 sec. n/second = 10^7.5
+n^2 = 30 years. n/second = 10^4.5
+2^n = 4 * 10^13 year. n/second = 30
+
+SIZE CHART: log n < sqrt(n) < n < n log n < n^2 < 2^n
+
+
+
+## Lecture 3 - Big-O notation
+
+DEFINITION OF BIG-O:
+
+f(n) = O(g(n)) (f is Big-O of g),
+OR f <= g,
+if there exist constants N and c such that for all n >= N, f(n) <= c * g(n)
+
+
+
+## Lecture 4 - Using Big-O
+
+Using the bad fibonacci as an example:
+Operation 1:
+Create an array of length n	 => O(n)
+F[0] <- 0	 => O(1)
+F[1] <- 1	 => O(1)
+for i from 2 to n:	=> Loop O(n) times
+F[i] <- F[i-1] + F[i-2]		=> O(n) // because n determines number of digits, which determines amount of work
+return F[n]	=> O(1)
+
+O(n) + O(1) + O(1) + O(n) * O(n) + O(1) = O(n^2) // O(n) * O(n) comes from the loop times the loop
+
+
+For lower bound of runtime, use BIG OMEGA notation
+
+For that they grow at the same rate, use BIG THETA of g()
+
