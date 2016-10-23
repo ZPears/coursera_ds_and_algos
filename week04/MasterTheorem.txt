@@ -1,0 +1,69 @@
+Finding complexity of problems without having to create a recurrence tree using the Master Theorem.
+
+As stated:
+
+"If you have a recurrence relation T(n) = some constant a times T*(ceiling(n/b)) plus O(n^d) - or:
+
+T(n) = aT(max(n/b)) + O(n^d)
+
+THEN:
+
+T(n) = {
+
+O(n^d) if d > log(b) of a
+O(n^d log n) if d = log(b) of a
+O(n^log(b) of a) if d < log(b) of a
+
+}
+
+EXAMPLE 1: the original polynomial multiplication.
+
+T(n) = 4T(n/2) + O(n^1)
+
+a = 4
+b = 2
+d = 1
+
+log(b) of a === log(2) of 4 === 2, which is > d (1)
+SO runtime is O(n^log(b) of a), or n^2
+
+EXAMPLE 2: Karatsuba's algorithm.
+
+T(n) = 3T(n/2) + O(n^1)
+
+a = 3
+b = 2
+d = 1
+
+log(b) of a = log(2) of 3 = 1.58, which is > d
+SO runtime is O(n^1.58)
+
+EXAMPLE 3: a equals 2
+
+T(n) = 2T(n/2) + O(n^1)
+
+a = 2; b = 2; d = 1
+
+log(b) of a = log(2) of 2 = 1, which is equal to d
+
+so result is O(n^1 * log n)
+
+EXAMPLE 4: a equals 1, d equals 0
+
+T(n) = T(n/2) + O(n^0)
+
+a = 1; b = 2; d = 0
+
+log b of a = log(2) of 1 = 0, which equals d
+
+so result is (n^0 * log n), or (1 * log n), or just (log n)
+
+EXAMPLE 5: where no additional complexity is added
+
+T(n) = 2T(n/2) + O(n^2)
+
+a = 2; b = 2; d = 2
+
+log b of a = log(2) of 2 = 1, which is < d
+
+SO result is O(n^d), or n^2
