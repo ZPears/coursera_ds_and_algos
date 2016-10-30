@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.lang.Math;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Sorting {
 
@@ -43,7 +44,6 @@ public class Sorting {
 		System.out.println("\nQuick Sort:");
 		System.out.println(Arrays.toString(a4));
 		System.out.println("\n");
-
 		
 	}
 
@@ -177,6 +177,11 @@ public class Sorting {
 			
 		} else {
 
+			int rando = ThreadLocalRandom.current().nextInt(l,r+1);
+			if (rando >= a.length) {
+				rando--;
+			}
+
 			int pivotIndex = partition(a, l, r);
 
 			QuickSort(a, l, pivotIndex-1);
@@ -207,7 +212,7 @@ public class Sorting {
 
 	}
 
-	public static int[] swapIndices(int[] a, int idx1, int idx2) {
+	public static void swapIndices(int[] a, int idx1, int idx2) {
 		
 		int tmp1 = a[idx1];
 		int tmp2 = a[idx2];
@@ -215,7 +220,6 @@ public class Sorting {
 		a[idx1] = tmp2;
 		a[idx2] = tmp1;
 
-		return(a);
 	}
 
 }
