@@ -21,22 +21,29 @@ public class Sorting {
 		int[] a = {5,7,4,5,6,7,3,8,6,14,11};
 		int[] a2 = a.clone();
 		int[] a3 = a.clone();
+		int[] a4 = a.clone();
 
-		System.out.println("Input:");
+		System.out.println("\nInput:");
 		System.out.println(Arrays.toString(a));
 
 		int[] aSelect = SelectionSort(a);
 		int[] aMerge = MergeSort(a2);
-		int[] aCount = MergeSort(a3);
+		int[] aCount = CountSort(a3);
+		QuickSort(a4, 0, a.length);
 	
-		System.out.println("Selection Sort:");
+		System.out.println("\nSelection Sort:");
 		System.out.println(Arrays.toString(aSelect));
 		
-		System.out.println("Merge Sort:");
+		System.out.println("\nMerge Sort:");
 		System.out.println(Arrays.toString(aMerge));
 
-		System.out.println("Count Sort:");
+		System.out.println("\nCount Sort:");
 		System.out.println(Arrays.toString(aCount));
+
+		System.out.println("\nQuick Sort:");
+		System.out.println(Arrays.toString(a4));
+		System.out.println("\n");
+
 		
 	}
 
@@ -133,15 +140,15 @@ public class Sorting {
 
 	}
 
-	public static int[] aCount(int[] a) {
+	public static int[] CountSort(int[] a) {
 
 		Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
 
 		for (int i=0; i < a.length; i++) {
-			if (counts.get(i) == null) {
-				counts.put(i, 1);
+			if (counts.get(a[i]) == null) {
+				counts.put(a[i], 1);
 			} else {
-				counts.put(i, counts.get(i) + 1);
+				counts.put(a[i], counts.get(a[i]) + 1);
 			}
 		}
 
@@ -163,5 +170,52 @@ public class Sorting {
 		return(result);
 
 	}
+
+	public static void QuickSort(int[] a, int l, int r) {
+
+		if (l > r || l >= a.length) {
+			
+		} else {
+
+			int pivotIndex = partition(a, l, r);
+
+			QuickSort(a, l, pivotIndex-1);
+			QuickSort(a, pivotIndex+1, r);
+
+		}
+
+	}
 	
+	public static int partition(int[] a, int l, int r) {
+
+		int pivot = a[l];
+		int j = l;
+
+		for (int i = l+1; i < r; i++) {
+
+			if (a[i] <= pivot) {
+				j++;
+				swapIndices(a, i, j);
+			}
+
+		}
+
+		swapIndices(a, l, j);
+
+		return(j);
+
+
+	}
+
+	public static int[] swapIndices(int[] a, int idx1, int idx2) {
+		
+		int tmp1 = a[idx1];
+		int tmp2 = a[idx2];
+		
+		a[idx1] = tmp2;
+		a[idx2] = tmp1;
+
+		return(a);
+	}
+
 }
