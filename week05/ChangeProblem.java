@@ -76,21 +76,21 @@ public class ChangeProblem {
 
 		int numCoins = 0;
 
-		int[] minNumCoins = new int[amount+1];
+		int[] minNumCoinsArray = new int[amount+1];
 
 		for (int m = 1; m <= amount; m++) {
 
-			minNumCoins[m] = 10000;
+			minNumCoinsArray[m] = 10000;
 
 			for (int i = 0; i < coins.length; i++) {
 
 				if (m >= coins[i]) {
 
-					numCoins = minNumCoins[m - coins[i]] + 1;
+					numCoins = minNumCoinsArray[m - coins[i]] + 1;
 
-					if (numCoins < minNumCoins[m]) {
+					if (numCoins < minNumCoinsArray[m]) {
 
-						minNumCoins[m] = numCoins;
+						minNumCoinsArray[m] = numCoins;
 
 					}
 
@@ -100,7 +100,7 @@ public class ChangeProblem {
 
 		}
 
-		return minNumCoins;
+		return minNumCoinsArray;
 
 	}
 

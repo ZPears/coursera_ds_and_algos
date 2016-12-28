@@ -82,25 +82,25 @@ public class AlignmentGame {
 		StringBuilder aBuf = new StringBuilder();
 		StringBuilder bBuf = new StringBuilder();
 
-		while (i > 1 && j > 1) {
+		while (i > 0 || j > 0) {
 
 			if (i > 0 && d[i][j] == d[i-1][j] + 1) {
 
-				i--;
 				aBuf.insert(0, a.charAt(i-1));
 				bBuf.insert(0, "-");
+				i--;
 
 			} else if (j > 0 && d[i][j] == d[i][j-1] + 1) {
 
-				j--;
 				aBuf.insert(0, "-");
 				bBuf.insert(0, b.charAt(j-1));
+				j--;
 
 			} else {
 
-				i--; j--;
 				aBuf.insert(0, a.charAt(i-1));
 				bBuf.insert(0, b.charAt(j-1));
+				i--; j--;
 
 			}
 
