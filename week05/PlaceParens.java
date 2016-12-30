@@ -22,7 +22,8 @@ public class PlaceParens {
 			System.out.println(Arrays.toString(maxValues[i]));
 		}
 		
-		System.out.println(greatestValue);	
+		System.out.println(greatestValue);
+		System.out.println(findPrecursors(minValues, maxValues, 0, minValues[0].length-1, ""));	
 
 	}
 
@@ -103,4 +104,43 @@ public class PlaceParens {
 		
 		return result;
 	}
+
+	private static String findPrecursors(int[][] minValues, int[][] maxValues, int targetRow, int targetCol, String stringSoFar) { 
+
+		int target = maxValues[targetRow][targetCol];
+
+		for (int i = targetRow; i < maxValues[0].length; i++) {
+			
+			int guess = 0;
+			int leftsideMax = Math.max( minValues[targetRow][i], maxValues[targetRow][i]);
+			int leftsideMin = Math.min( minValues[targetRow][i], maxValues[targetRow][i]);
+			int rightsideMax = Math.max( maxValues[i+1][maxValues[0].length - 1 - i], maxValues[i + 1][maxValues[0].length - 1 - i]);
+			int rightsideMin = Math.min( minValues[i+1][minValues[0].length - 1 - i], minValues[i + 1][minValues[0].length - 1 - i]);
+			
+			if (operators[i] == '-') {
+				guess = leftsideMax - rightsideMin;
+			} else if (operators[i] == '+') {
+				guess = leftsideMax + rightsideMax;
+			} else if (operators[i] == '*') {
+				guess = Math.max( (leftsideMax * rightsideMax), (leftsideMin * rightsideMin) ); 
+			}
+
+			System.out.println("Target is: " + target);
+			System.out.println("Guess is: " + guess);
+			
+
+			// would need to call again with the string so far and the reduced matrix
+			if (guess == target && operators[i] != '*') {
+				return ("( " + leftsideMax + " " + operators[i] + " " + rightsideMin + " )");
+			} else if (guess == target && (leftsideMax * rightsideMax) == guess) {
+				return ("( " + leftsideMax + " " + operators[i] + " " + rightsideMax + " )");
+			} else if (guess == target && (leftsideMin * rightsideMin) == guess) {
+				return ("( " + leftsideMin + " " + operators[i] + " " + rightsideMin + " )");
+			}
+
+		}
+
+		return "Not Found";
+	}
+
 }
