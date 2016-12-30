@@ -6,8 +6,8 @@ public class AlignmentGame {
 
 	public static void main(String[] args) {
 
-		String a = "bread";
-		String b = "really";
+		String a = args[0];
+		String b = args[1];
 
 		int[][] result = editDistance(a,b);
 
