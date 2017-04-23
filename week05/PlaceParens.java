@@ -130,6 +130,7 @@ public class PlaceParens {
 			
 
 			// would need to call again with the string so far and the reduced matrix
+			// actually, make new calls for each max side?
 			if (guess == target && operators[i] != '*') {
 				return ("( " + leftsideMax + " " + operators[i] + " " + rightsideMin + " )");
 			} else if (guess == target && (leftsideMax * rightsideMax) == guess) {
