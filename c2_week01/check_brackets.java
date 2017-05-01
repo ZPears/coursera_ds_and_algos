@@ -2,10 +2,14 @@ import java.util.*;
 import java.io.*;
 import java.lang.Math;
 
-public class IsBalanced {
+class check_brackets {
 
-    public static void main(String[] args) {
-        int isBalanced = new IsBalanced().findBalance(args[0]);
+    public static void main(String[] args) throws IOException {
+        InputStreamReader input_stream = new InputStreamReader(System.in);
+        BufferedReader reader = new BufferedReader(input_stream);
+        String text = reader.readLine();
+
+        int isBalanced = new check_brackets().findBalance(text);
         if (isBalanced < 0) {
             System.out.println("Success");
         } else {System.out.println(isBalanced);}
@@ -74,8 +78,8 @@ public class IsBalanced {
                 st.push(new ParenWithIdx(newParen, i));
             }
             else if (ParenManager.isRightParen(c)) {
-                ParenWithIdx top = st.pop();
-                if (!top.paren.isMatched(c)) {
+                if (st.isEmpty()) { return i + 1; }
+                if (!st.pop().paren.isMatched(c)) {
                     return i + 1 ;
                 }
             }
